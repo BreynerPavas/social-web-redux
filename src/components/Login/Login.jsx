@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../../features/auth/authSlice";
+
+import './Login.scss'
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -19,7 +21,7 @@ const Login = () => {
     dispatch(login(formData));
   };
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="return">
       <input type="email" name="email" value={email} onChange={onChange} />
       <input
         type="password"
