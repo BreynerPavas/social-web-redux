@@ -3,7 +3,21 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Header.scss'
 import { Link } from "react-router-dom";
 
+import { useDispatch, useSelector } from "react-redux";
+
+import { logout } from "../../features/auth/authSlice";
+
+
 const Header = () => {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+  console.log(user);
+  
+  const onLogout = () => {
+    dispatch(logout());
+    navigate("/login")
+  };
+
   return (
     <>
     <header class="p-3 text-bg-dark">
@@ -21,8 +35,22 @@ const Header = () => {
           <li><a href="#" class="nav-link px-2 text-white">About</a></li>
         </ul>
         <div class="text-end">
-          <button type="button" class="btn btn-outline-light me-2"><Link to="/login" className='links' >Login</Link></button>
-          <button type="button" class="btn btn-warning">Sign-up</button>
+          {
+            !user?
+            <>
+            <button type="button" class="btn btn-outline-light me-2"><Link to="/login" className='links' >Login</Link></button>
+            <button type="button" class="btn btn-warning"><Link to="/register" className='links' id='linkRegister' >Sign-in</Link></button>
+            </>
+            :
+            <>
+            <Link to="/profile" className='userName'>{user.name}</Link>
+            <button type="button" class="btn btn-danger btn-floating" data-mdb-ripple-init onClick={onLogout}>
+            Logout
+            </button>
+            </>
+          }
+          {/*  */}
+          
         </div>
       </div>
     </div>
