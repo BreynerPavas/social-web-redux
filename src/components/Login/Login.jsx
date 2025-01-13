@@ -5,7 +5,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 import './Login.scss'
+import { useNavigate } from "react-router-dom";
 const Login = () => {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -21,18 +23,9 @@ const Login = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(login(formData));
+    navigate("/")
   };
   return (
-    // <form onSubmit={onSubmit} className="return">
-    //   <input type="email" name="email" value={email} onChange={onChange} />
-    //   <input
-    //     type="password"
-    //     name="password"
-    //     value={password}
-    //     onChange={onChange}
-    //   />
-    //   <button type="submit">Login</button>
-    // </form>
     <>
     <section className="return">
   <div className="">

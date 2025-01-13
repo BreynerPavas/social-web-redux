@@ -1,7 +1,7 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Header.scss'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -9,6 +9,7 @@ import { logout } from "../../features/auth/authSlice";
 
 
 const Header = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   console.log(user);
@@ -38,8 +39,8 @@ const Header = () => {
           {
             !user?
             <>
-            <button type="button" class="btn btn-outline-light me-2"><Link to="/login" className='links' >Login</Link></button>
-            <button type="button" class="btn btn-warning"><Link to="/register" className='links' id='linkRegister' >Sign-in</Link></button>
+            <button type="button" class="btn btn-outline-light me-2 linksButton"><Link to="/login" className='links' >Login</Link></button>
+            <button type="button" class="btn btn-warning linksButton"><Link to="/register" className='links' id='linkRegister' >Sign-in</Link></button>
             </>
             :
             <>

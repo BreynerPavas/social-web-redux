@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { register } from "../../features/auth/authSlice";
+import { register, login } from "../../features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { notification } from "antd";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -34,8 +34,10 @@ const Register = () => {
         description: "Passwords do not match",
       });
     } else {
-      return dispatch(register(formData));
-      
+      if (dispatch(register(formData))) {
+        dispatch(login(formData))
+        navigate("/")
+      }
     }
   };
   return (

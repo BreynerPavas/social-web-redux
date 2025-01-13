@@ -5,6 +5,9 @@
 * ===========================================================
 *
 */
+.likeButton{
+  cursor: pointer;
+}
 .hero {
     padding: 6rem 0px 0 0 !important;
     margin: 0px !important;
@@ -117,8 +120,7 @@
       position: relative;
       display: block;
   }
-  .cardbox .cardbox-item img{
-  }
+  
   .img-responsive{
       display: block;
       max-width: 100%;

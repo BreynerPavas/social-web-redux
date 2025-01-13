@@ -13,6 +13,13 @@ export const getAll = createAsyncThunk("posts/getAll", async () => {
     console.error(error);
   }
 });
+export const addPost = createAsyncThunk("posts/addPost", async (post) => {
+  try {
+    return await postsService.addPost(post);
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 export const postsSlice = createSlice({
   name: "posts",
@@ -23,6 +30,7 @@ export const postsSlice = createSlice({
       .addCase(getAll.fulfilled, (state, action) => {
         state.posts = action.payload;
       })
+      
   },
 });
 

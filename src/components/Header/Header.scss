@@ -9,8 +9,11 @@ header{
     text-decoration: none;
     color: white;
 }
-.links:hover{
-    color: black;
+.linksButton:hover{
+    a{
+        color:black
+    }
+    
 }
 #linkRegister{
     color:black
