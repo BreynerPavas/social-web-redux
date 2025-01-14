@@ -13,6 +13,7 @@ const initialState = {
   isError: false,
   isSuccess: false,
   message: "",
+  users:[]
 };
 
 export const authSlice = createSlice({
@@ -45,6 +46,9 @@ export const authSlice = createSlice({
       state.isError = true
       state.message = action.payload
     })
+    .addCase(searchName.fulfilled,(state,action)=>{
+      state.users = action.payload
+    })
   },
 });
 
@@ -60,6 +64,13 @@ export const register = createAsyncThunk(
     }
   }
 );
+export const searchName = createAsyncThunk("auth/searchName", async (userName) => {
+  try {
+    return await authService.searchName(userName);
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 export const login = createAsyncThunk("auth/login", async (user) => {
   try {

@@ -8,6 +8,7 @@ import Home from './components/Home/Home'
 import Profile from './components/Profile/Profile'
 import Footer from './components/Footer/Footer'
 import AddPost from './components/AddPost/AddPost'
+import Search from './components/Search/Search'
 
 function App() {
 
@@ -20,8 +21,9 @@ function App() {
       <Route path="/" element={ <Home/>} />
       <Route path="/register" element={ <Register/>} />
       <Route path="/login" element={ <Login/>} />
-      <Route path="/profile" element={ <Profile/>} />
+      <Route path="/profile/:id" element={ <Profile/>} />
       <Route path="/addPost" element={ <AddPost/>} />
+      <Route path="/search/:name" element={ <Search/>} />
     </Routes>
     <Footer/>
     </BrowserRouter>

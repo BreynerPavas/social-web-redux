@@ -5,6 +5,7 @@ import './Home.scss'
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAll } from "../../features/post/postSlice";
+import { Link } from 'react-router-dom';
 
 
 const Home = () => {
@@ -17,6 +18,7 @@ const Home = () => {
 	const { posts } = useSelector((state) => state.post);
 	const post = posts.map((post) => {
 		return (
+			
 			<section class="hero">
 			<div class="container">
 			 <div class="row">	
@@ -30,9 +32,18 @@ const Home = () => {
 				<div class="m-0">
 				 
 				<div class="media-body d-flex postHeader">
-				  <img src={img} alt="" width={"30px"} className='userImg' />
+				  <Link to={"/profile/"+post.userId?._id}>
+								  <img src={img} alt="" width={"30px"} className='userImg' />
+					</Link>
 				  {
-				  post.userId? <p className='m-0'>{post.userId.name}</p> :<p className='m-0'>Not user linked</p> 
+				  post.userId? 
+				  <Link to={"/profile/"+post.userId?._id}>
+					  <p className='m-0'>{post.userId.name}</p> 
+
+				  </Link>:
+
+				  
+				  <p className='m-0'>Not user linked</p> 
 				  }
 				  
 				   

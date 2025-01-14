@@ -12,12 +12,21 @@ const Header = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  console.log(user);
+
   
   const onLogout = () => {
     dispatch(logout());
     navigate("/login")
   };
+  const onKeyUpHandler = (e) => {
+    if (e.key === "Enter") {
+      navigate("/search/"+e.target.value)
+    }
+  }
+  
+  const submitHandler = (e) =>{
+    e.preventDefault()
+  }
 
   return (
     <>
@@ -35,6 +44,9 @@ const Header = () => {
           <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
           <li><a href="#" class="nav-link px-2 text-white">About</a></li>
         </ul>
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" onSubmit={submitHandler}>
+          <input type="search" class="form-control form-control-dark text-bg-dark" onKeyUp={onKeyUpHandler} placeholder="Search..." aria-label="Search"/>
+        </form>
         <div class="text-end">
           {
             !user?
@@ -44,7 +56,8 @@ const Header = () => {
             </>
             :
             <>
-            <Link to="/profile" className='userName'>{user.name}</Link>
+            
+            <Link to={"/profile/"+user._id} className='userName'>{user.name}</Link>
             <button type="button" class="btn btn-danger btn-floating" data-mdb-ripple-init onClick={onLogout}>
             Logout
             </button>

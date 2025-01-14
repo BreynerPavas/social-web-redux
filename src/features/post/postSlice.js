@@ -3,7 +3,8 @@ import postsService from "./postService";
 
 
 const initialState = {
-posts:[]
+posts:[],
+userPost:[]
 };
 
 export const getAll = createAsyncThunk("posts/getAll", async () => {
@@ -13,6 +14,15 @@ export const getAll = createAsyncThunk("posts/getAll", async () => {
     console.error(error);
   }
 });
+
+export const getUserPost = createAsyncThunk("posts/getUserPost", async (id) => {
+  try {
+    return await postsService.getUserPost(id);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 export const addPost = createAsyncThunk("posts/addPost", async (post) => {
   try {
     return await postsService.addPost(post);
@@ -29,6 +39,10 @@ export const postsSlice = createSlice({
     builder
       .addCase(getAll.fulfilled, (state, action) => {
         state.posts = action.payload;
+      })
+      .addCase(getUserPost.fulfilled, (state, action) => {
+        state.userPost = action.payload.posts
+
       })
       
   },

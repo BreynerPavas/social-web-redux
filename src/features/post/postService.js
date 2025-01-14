@@ -14,10 +14,15 @@ const addPost = async(post) => {
   },});
   return res.data; //payload
 }
+const getUserPost = async (id) => {
+  const res = await axios.get(API_URL+"/getUserPosts/"+id);
+  return res.data;
+};
 
 const postsService = {
   getAll,
-  addPost
+  addPost,
+  getUserPost
 };
 
 export default postsService;

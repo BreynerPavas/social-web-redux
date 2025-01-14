@@ -16,6 +16,10 @@ const login = async (userData) => {
   }
   return res.data;
 };
+const searchName = async (userName) => {
+  const res = await axios.get(API_URL + "/search/"+userName);
+  return res.data;
+}
 
 const logout = async () => {
   const token = localStorage.getItem("token");
@@ -30,10 +34,13 @@ const logout = async () => {
   return res.data;
 };
 
+
+
 const authService = {
   register,
   login,
-  logout
+  logout,
+  searchName
 };
 
 export default authService;
