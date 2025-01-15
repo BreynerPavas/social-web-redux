@@ -4,7 +4,8 @@ import postsService from "./postService";
 
 const initialState = {
 posts:[],
-userPost:[]
+userPost:[],
+post:{}
 };
 
 export const getAll = createAsyncThunk("posts/getAll", async () => {
@@ -31,6 +32,21 @@ export const addPost = createAsyncThunk("posts/addPost", async (post) => {
   }
 });
 
+export const getPostById = createAsyncThunk("posts/getPostById", async (id) => {
+  try {
+    return await postsService.getPostById(id);
+  } catch (error) {
+    console.error(error);
+  }
+});
+export const addComment = createAsyncThunk("posts/addComment", async (comment) => {
+  try {
+    return await postsService.addComment(comment);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 export const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -42,7 +58,12 @@ export const postsSlice = createSlice({
       })
       .addCase(getUserPost.fulfilled, (state, action) => {
         state.userPost = action.payload.posts
-
+      })
+      .addCase(getPostById.fulfilled,(state,action)=>{
+        state.post = action.payload
+      })
+      .addCase(addPost.fulfilled,(state,action)=> {
+        state.posts = [action.payload,...state.posts]
       })
       
   },

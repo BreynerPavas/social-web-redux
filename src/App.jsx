@@ -9,6 +9,7 @@ import Profile from './components/Profile/Profile'
 import Footer from './components/Footer/Footer'
 import AddPost from './components/AddPost/AddPost'
 import Search from './components/Search/Search'
+import PostDetail from './components/PostDetail/PostDetail'
 
 function App() {
 
@@ -24,6 +25,8 @@ function App() {
       <Route path="/profile/:id" element={ <Profile/>} />
       <Route path="/addPost" element={ <AddPost/>} />
       <Route path="/search/:name" element={ <Search/>} />
+      <Route path="/postDetail/:id" element={ <PostDetail/>} />
+
     </Routes>
     <Footer/>
     </BrowserRouter>

@@ -21,6 +21,7 @@ const Header = () => {
   const onKeyUpHandler = (e) => {
     if (e.key === "Enter") {
       navigate("/search/"+e.target.value)
+      e.target.value = ""
     }
   }
   

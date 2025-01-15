@@ -21,18 +21,12 @@ let likes = 0;
 
 const dispatch = useDispatch();
 	useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "auto" // Cambiar "smooth" por "auto" hace el desplazamiento instantáneo
-    });
+    window.scrollTo(
+      0,
+      0
+    );
 		dispatch(getUserPost(userID.id));
-    userPost.map((post)=>{
-      // likes+= post.likes.length
-      
-      likes+= post.likes.length;
-      
-    })
+    
 	}, []);
 
 
@@ -78,8 +72,19 @@ const dispatch = useDispatch();
           </li>
           <li className="list-inline-item">
             <h5 className="font-weight-bold mb-0 d-block">{
-              likes
-              }</h5>
+
+              userPost.map((post)=>{
+                
+                console.log("likes de la publicacion: "+post.likes.length);
+                likes+= post.likes?.length;
+                console.log("likes obtenidos: "+likes);
+                
+                
+              })
+              
+              }
+              {likes}
+              </h5>
             <small className="text-muted">
               Likes
             </small>
@@ -123,7 +128,9 @@ const dispatch = useDispatch();
               </div>
                
               <div class="cardbox-item">
+                <Link to={"/postDetail/"+post._id}>
                <img class="img-fluid" src={img} alt="Image"/>
+               </Link>
               </div>
               <div class="cardbox-base">
                

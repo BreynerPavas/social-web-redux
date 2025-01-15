@@ -9,13 +9,21 @@ import { Link } from 'react-router-dom';
 
 
 const Home = () => {
+	const { posts } = useSelector((state) => state.post);
 	const dispatch = useDispatch();
+
 	useEffect(() => {
 		dispatch(getAll());
 	}, []);
+
+	useEffect(() => {
+		window.scrollTo(
+			0,
+			0
+		  );
+	}, []);
 	
 	
-	const { posts } = useSelector((state) => state.post);
 	const post = posts.map((post) => {
 		return (
 			
@@ -49,13 +57,16 @@ const Home = () => {
 				   
 				   
 				  </div>
-				  <p className='mx-4'> {post.body}	
+				  <p className='mx-4'> {post.title}	
 				  </p>
 				 </div>
 				</div>
 				 
 				<div class="cardbox-item">
+					<Link to={"/postDetail/"+post._id}>
 				 <img class="img-fluid" src={img} alt="Image"/>
+					
+					</Link>
 				</div>
 				<div class="cardbox-base">
 				 
@@ -66,7 +77,7 @@ const Home = () => {
 					</svg>
 					</span>
 				
-				  <li><a><span>{post.likes.length} Likes</span></a></li>
+				  <li><a><span>{post.likes?.length} Likes</span></a></li>
 				 </ul>			   
 				</div>
 				{/* <div class="cardbox-comments">

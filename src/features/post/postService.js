@@ -18,11 +18,27 @@ const getUserPost = async (id) => {
   const res = await axios.get(API_URL+"/getUserPosts/"+id);
   return res.data;
 };
+const getPostById = async (id) => {
+  const res = await axios.get(API_URL+"/id/"+id);
+  return res.data;
+};
+
+const addComment = async (comment) => {
+  const token = localStorage.getItem("token") || "";
+
+  const res = await axios.post("http://localhost:8080/comments/create/"+comment.idPost,{body: comment.body},{headers:
+    {authorization: token}
+  });
+  return res.data;
+}
+
 
 const postsService = {
   getAll,
   addPost,
-  getUserPost
+  getUserPost,
+  getPostById,
+  addComment
 };
 
 export default postsService;
