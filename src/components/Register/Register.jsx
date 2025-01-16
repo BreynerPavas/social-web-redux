@@ -26,20 +26,34 @@ const Register = () => {
       [e.target.name]: e.target.value,
     });
   };
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+  
     if (password !== password2) {
       return notification.error({
         message: "Error",
         description: "Passwords do not match",
       });
     } else {
-      if (dispatch(register(formData))) {
-        dispatch(login(formData))
-        navigate("/")
+      try {
+        // Primero, hacemos el dispatch de register y esperamos su respuesta.
+        const registerSuccess = await dispatch(register(formData));
+  
+        // Si el registro fue exitoso, procedemos con el login
+        if (registerSuccess) {
+          await dispatch(login(formData)); // Asegúrate de esperar el login
+          navigate("/"); // Redirigimos al inicio
+        }
+      } catch (error) {
+        // Si hay algún error en el registro o el login, mostramos un mensaje
+        notification.error({
+          message: "Error",
+          description: "Hubo un error en el registro o login.",
+        });
       }
     }
   };
+  
   return (
     // <form onSubmit={onSubmit} className="return">
     //   <input

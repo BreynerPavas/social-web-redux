@@ -133,7 +133,7 @@ const PostDetail = () => {
                 </Link>
               <div>
                 <Link to={"/profile/"+post.userId._id}>
-                <h6 class="fw-bold text-primary mb-1">{post.userId.name}</h6>
+                <h6 class="fw-bold text-primary mb-1">{user.name}</h6>
                 </Link>
                 <p class="text-muted small mb-0">
                   Shared publicly - Jan 2020
