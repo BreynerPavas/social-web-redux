@@ -27,7 +27,7 @@ const Home = () => {
 	
 	
 	const post = posts.map((post) => {
-		const isAlreadyLiked = post.likes?.includes(user._id);
+		const isAlreadyLiked = post.likes?.includes(user?._id);
 		
 		
 		
