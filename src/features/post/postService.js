@@ -32,13 +32,34 @@ const addComment = async (comment) => {
   return res.data;
 }
 
+const like = async (_id) => {
+  const token = localStorage.getItem("token");
+  const res = await axios.put(API_URL + "/like/"+_id, {}/*body*/, {
+      headers: {
+        authorization: token,
+      },
+    } );
+  return res.data;
+};
+const unlike = async (_id) => {
+  const token = localStorage.getItem("token");
+  const res = await axios.put(API_URL + "/deleteLike/"+_id, {}/*body*/, {
+      headers: {
+        authorization: token,
+      },
+    } );
+  return res.data;
+};
+
 
 const postsService = {
   getAll,
   addPost,
   getUserPost,
   getPostById,
-  addComment
+  addComment,
+  like,
+  unlike
 };
 
 export default postsService;

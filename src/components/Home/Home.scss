@@ -6,7 +6,9 @@
 *
 */
 .likeButton{
-  cursor: pointer;
+  cursor: pointer !important;
+  width: 20px;
+  height: 20px;
 }
 .hero {
     padding: 6rem 0px 0 0 !important;

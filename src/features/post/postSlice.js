@@ -27,6 +27,7 @@ export const getUserPost = createAsyncThunk("posts/getUserPost", async (id) => {
 export const addPost = createAsyncThunk("posts/addPost", async (post) => {
   try {
     return await postsService.addPost(post);
+    
   } catch (error) {
     console.error(error);
   }
@@ -46,6 +47,21 @@ export const addComment = createAsyncThunk("posts/addComment", async (comment) =
     console.error(error);
   }
 });
+export const like = createAsyncThunk("posts/like", async (_id) => {
+  try {
+    return await postsService.like(_id);
+  } catch (error) {
+    console.error(error);
+  }
+});
+export const unlike = createAsyncThunk("posts/unlike", async (_id) => {
+  try {
+    return await postsService.unlike(_id);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 
 export const postsSlice = createSlice({
   name: "posts",
@@ -63,8 +79,50 @@ export const postsSlice = createSlice({
         state.post = action.payload
       })
       .addCase(addPost.fulfilled,(state,action)=> {
-        state.posts = [action.payload,...state.posts]
+        console.log("sofia",action.payload.post);
+        state.posts = [action.payload.post,...state.posts]
       })
+      .addCase(like.fulfilled,(state,action)=>{
+        state.post = action.payload;
+        // creamos un nuevo array que tenga los productos actualizados. Concretamente agarramoso el producto que llega actualizado del backend y lo cambiamos por el producto que no esta actualizado
+        const postsUpdated = state.posts.map(post=>{
+            if(post._id == action.payload._id){
+                post = action.payload
+            }
+            return post
+        })
+        state.posts = postsUpdated
+        const userPostsUpdated = state.userPost.map(post => {
+          if(post._id == action.payload._id){
+            post = action.payload
+        }
+        return post
+        })
+        state.userPost = userPostsUpdated
+    })
+    .addCase(unlike.fulfilled,(state,action)=>{
+      state.post = action.payload;
+
+      // creamos un nuevo array que tenga los productos actualizados. Concretamente agarramoso el producto que llega actualizado del backend y lo cambiamos por el producto que no esta actualizado
+      const postsUpdated = state.posts.map(post=>{
+          if(post._id == action.payload._id){
+              post = action.payload
+          }
+          return post
+      })
+      state.posts = postsUpdated
+
+      const userPostsUpdated = state.userPost.map(post => {
+        if(post._id == action.payload._id){
+          post = action.payload
+      }
+      return post
+      })
+      state.userPost = userPostsUpdated
+
+
+  })
+      
       
   },
 });
